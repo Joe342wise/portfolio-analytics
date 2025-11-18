@@ -8,14 +8,11 @@ WORKDIR /app
 # Copy dependency files
 COPY package.json pnpm-lock.yaml ./
 
-# Install ALL dependencies (including TypeScript for building)
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-# Build the TypeScript project
-RUN pnpm run build
+EXPOSE 3000
 
-EXPOSE 4000
-
-CMD ["pnpm", "start"]
+CMD ["pnpm", "run", "dev"]

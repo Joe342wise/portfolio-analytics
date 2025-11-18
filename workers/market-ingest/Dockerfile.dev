@@ -1,0 +1,12 @@
+FROM node:20-alpine
+
+# Install pnpm
+RUN npm install -g pnpm
+
+WORKDIR /app
+
+# Copy everything (including node_modules from local)
+COPY . .
+
+# Use ts-node for development (no build needed)
+CMD ["pnpm", "run", "dev"]

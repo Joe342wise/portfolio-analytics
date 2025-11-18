@@ -19,7 +19,7 @@ export async function authMiddleware(req: Request): Promise<User | null> {
   // In development mode, accept mock tokens
   if (process.env.NODE_ENV === 'development' && token === 'dev-token') {
     return {
-      id: 'dev-user-1',
+      id: '550e8400-e29b-41d4-a716-446655440001',
       email: 'dev@example.com',
       tenantId: 'tenant-1',
       createdAt: new Date(),
@@ -31,10 +31,10 @@ export async function authMiddleware(req: Request): Promise<User | null> {
     // const { userId } = await clerkClient.verifyToken(token);
     // const user = await clerkClient.users.getUser(userId);
 
-    // For now, return mock user
+    // For now, return mock user with proper UUID
     return {
-      id: 'user-1',
-      email: 'test@example.com',
+      id: '550e8400-e29b-41d4-a716-446655440001',
+      email: 'dev@example.com',
       tenantId: 'tenant-1',
       createdAt: new Date(),
     };

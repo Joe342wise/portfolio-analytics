@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
@@ -60,9 +61,16 @@ async function startServer() {
 
   await server.start();
 
+  // Enable CORS for frontend
+  app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    credentials: true,
+  }));
+
   app.use(
     '/graphql',
     express.json(),
+    express.urlencoded({ extended: true }),
     expressMiddleware(server, {
       context: async ({ req }) => {
         const user = await authMiddleware(req);
